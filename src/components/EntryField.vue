@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex mb-4">
     <input
-      class="form-control input"
+      class="form-control"
       type="text"
       :value="setValue(valueCur)"
       @input="$emit('change-input', $event.target.value, label)"
@@ -17,7 +17,8 @@
         :key="cur.Cur_ID"
         :value="cur.Cur_Abbreviation"
         :class="cur.Cur_Abbreviation === baseCur ? 'yellow' : ''"
-      >{{cur.Cur_Abbreviation}}</option>
+        >{{ cur.Cur_Abbreviation }}</option
+      >
     </select>
   </div>
 </template>
@@ -53,7 +54,12 @@ export default {
 
 <style scoped>
 .select {
-  width: 76px;
+  width: 90px;
+}
+
+input,
+select {
+  font-size: 18px;
 }
 
 .yellow {

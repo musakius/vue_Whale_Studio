@@ -1,8 +1,15 @@
 <template>
-  <div class="col-8 mx-auto">
-    <h2 class="text-center my-5">Курсы валют на {{getDate}}</h2>
+  <div class="col-12 col-lg-10 mx-auto">
+    <h1 class="text-center my-5">
+      {{ "Title_Table_Page" | localize }} {{ date | date }}
+    </h1>
     <Spinner v-if="loading" />
-    <Table v-else :allCur="allCur" @del-chosen="deleteChosen" @add-chosen="addChosen" />
+    <Table
+      v-else
+      :allCur="allCur"
+      @del-chosen="deleteChosen"
+      @add-chosen="addChosen"
+    />
   </div>
 </template>
 
@@ -10,14 +17,15 @@
 import Table from "@/components/Table";
 import Spinner from "@/components/Spinner";
 import Service from "@/services/services";
+import en from "../locales/en.json";
 
 export default {
   name: "ExchangeRates",
-  props: ["curEngName"],
   data() {
     return {
       allCur: [],
-      loading: true
+      loading: true,
+      date: new Date()
     };
   },
   mounted() {
@@ -25,7 +33,7 @@ export default {
 
     service
       .getAllCurrencies()
-      .then(data => {
+      .then((data) => {
         this.allCur = this.setCur(data);
         this.loading = false;
       })
@@ -34,15 +42,24 @@ export default {
   methods: {
     setCur(data) {
       let arr = data.map((el, i) => {
-        return { ...el, Cur_Eng_Name: this.curEngName[i], chosen: false };
+        return { ...el, Cur_Eng_Name: en.Cur_Eng_Name[i], chosen: false };
       });
-      console.log(arr);
       return arr.sort(this.sortByUsdEurRub);
     },
-    setr(data) {
-      data = data.map(el => (el = { ...el, chosen: false }));
-      return data.sort(this.sortByUsdEurRub);
+    addChosen(id) {
+      const chosenElem = this.allCur.find((el) => el.Cur_ID === id);
+      chosenElem.chosen = true;
+      const restElem = this.allCur.filter((el) => el.Cur_ID !== id);
+      this.allCur = [chosenElem, ...restElem];
     },
+
+    deleteChosen(id) {
+      const chosenElem = this.allCur.find((el) => el.Cur_ID === id);
+      chosenElem.chosen = false;
+      const restElem = this.allCur.filter((el) => el.Cur_ID !== id);
+      this.allCur = [...restElem, chosenElem].sort(this.sortByNameAndChosen);
+    },
+
     sortByUsdEurRub(a, b) {
       const arrCur = ["USD", "RUB", "EUR"];
       for (let i = 0; i < arrCur.length; i++) {
@@ -54,48 +71,24 @@ export default {
           return -1;
       }
     },
-    sortByNameAndchosen(a, b) {
+    sortByNameAndChosen(a, b) {
       if (a.chosen === false && b.chosen === false) {
         if (a.Cur_Name < b.Cur_Name) return -1;
         if (a.Cur_Name > b.Cur_Name) return 1;
       } else {
         return 0;
       }
-    },
-
-    addChosen(id) {
-      const chosenElem = this.allCur.find(el => el.Cur_ID === id);
-      chosenElem.chosen = true;
-      const restElem = this.allCur.filter(el => el.Cur_ID !== id);
-      this.allCur = [chosenElem, ...restElem];
-    },
-
-    deleteChosen(id) {
-      const chosenElem = this.allCur.find(el => el.Cur_ID === id);
-      chosenElem.chosen = false;
-      const restElem = this.allCur.filter(el => el.Cur_ID !== id);
-      this.allCur = [...restElem, chosenElem].sort(this.sortByNameAndchosen);
     }
   },
   components: {
     Table,
     Spinner
-  },
-  computed: {
-    getDate() {
-      const options = {
-        day: "2-digit",
-        month: "long",
-        year: "numeric"
-      };
-      return new Intl.DateTimeFormat("ru-RU", options).format(new Date());
-    }
   }
 };
 </script>
 
 <style scoped>
-h2 {
+h1 {
   font-family: cursive;
 }
 </style>
