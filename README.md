@@ -1,1 +1,1 @@
-# https://currency-convertr.web.app/
+View project in browser: https://currency-convertr.web.app/
