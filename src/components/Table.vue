@@ -9,11 +9,7 @@
       </tr>
     </tbody>
     <transition-group name="flip-list" tag="tbody">
-      <tr
-        v-for="cur of allCur"
-        :key="cur.Cur_ID"
-        :class="cur.chosen ? 'yellow' : 'table-active'"
-      >
+      <tr v-for="cur of allCur" :key="cur.Cur_ID" :class="cur.chosen ? 'yellow' : 'table-active'">
         <th scope="row">
           {{ cur.Cur_Scale }}
           {{ srtLocalCur(cur.Cur_Eng_Name, cur.Cur_Name) }}
@@ -21,16 +17,8 @@
         <td>{{ cur.Cur_OfficialRate.toFixed(3) }}</td>
         <td>{{ cur.Cur_Abbreviation }}</td>
         <td class="text-center">
-          <i
-            v-if="cur.chosen"
-            class="fas fa-star yellow"
-            @click="$emit('del-chosen', cur.Cur_ID)"
-          />
-          <i
-            v-else
-            class="far fa-star"
-            @click="$emit('add-chosen', cur.Cur_ID)"
-          />
+          <i v-if="cur.chosen" class="fas fa-star yellow" @click="$emit('del-chosen', cur.Cur_ID)" />
+          <i v-else class="far fa-star" @click="$emit('add-chosen', cur.Cur_ID)" />
         </td>
       </tr>
     </transition-group>
@@ -73,6 +61,6 @@ table {
 }
 
 .flip-list-move {
-  transition: transform 1s;
+  transition: transform 0.6s;
 }
 </style>

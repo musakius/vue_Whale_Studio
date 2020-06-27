@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-center my-5">{{ "Title_Home_Page" | localize }}</h1>
     <Spinner v-if="loading" />
-    <div v-else class=" col-11 col-md-6 col-lg-4 mx-auto">
+    <div v-else class="col-11 col-md-6 col-lg-4 mx-auto">
       <EntryField
         :allCur="allCur"
         :baseCur="oneObjCur.Cur_Abbreviation"
@@ -52,7 +52,7 @@ export default {
 
     service
       .getAllCurrencies()
-      .then((data) => {
+      .then(data => {
         this.setCur(data);
         this.loading = false;
       })
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     setCur(data) {
-      const USD = data.find((el) => el.Cur_Abbreviation === "USD");
+      const USD = data.find(el => el.Cur_Abbreviation === "USD");
       this.oneObjCur = JSON.parse(localStorage.getItem("one-cur")) || this.BYN;
       this.twoObjCur = JSON.parse(localStorage.getItem("two-cur")) || USD;
       this.allCur = [this.BYN, ...data.sort(this.sortByUsdEur)];
@@ -75,17 +75,20 @@ export default {
       }
     },
     onChangeSelect(val, str) {
-      const elem = this.allCur.find((el) => el.Cur_Abbreviation === val);
+      const elem = this.allCur.find(el => el.Cur_Abbreviation === val);
+      str === "one-cur" ? (this.oneObjCur = elem) : (this.twoObjCur = elem);
+      localStorage.setItem(str, JSON.stringify(elem));
+
       if (str === "one-cur") this.getResConver(this.oneValСur, str);
       if (str === "two-cur") this.getResConver(this.twoValСur, str);
-      str === "one-cur" ? (this.oneObjCur = elem) : (this.twoObjCur = elem);
+
       if (this.oneValСur === "") this.twoValСur = "";
       if (this.twoValСur === "") this.oneValСur = "";
-      localStorage.setItem(str, JSON.stringify(elem));
     },
     onChangeInput(val, str) {
       this.getResConver(val, str);
       str === "one-cur" ? (this.oneValСur = val) : (this.twoValСur = val);
+
       if (val === "") if (str === "one-cur") this.twoValСur = "";
       if (val === "") if (str === "two-cur") this.oneValСur = "";
     },

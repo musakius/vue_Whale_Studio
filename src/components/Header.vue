@@ -2,14 +2,18 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary d-flex">
     <ul class="navbar-nav mr-auto">
       <li>
-        <router-link class="link" to="/" exact>{{
+        <router-link class="link" to="/" exact>
+          {{
           "Converter_Link" | localize
-        }}</router-link>
+          }}
+        </router-link>
       </li>
       <li>
-        <router-link class="link" to="/exchange_rates">{{
+        <router-link class="link" to="/exchange_rates">
+          {{
           "All_Cur_Link" | localize
-        }}</router-link>
+          }}
+        </router-link>
       </li>
     </ul>
     <select class="form-control" v-model="locale">

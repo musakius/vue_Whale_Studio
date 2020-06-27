@@ -17,8 +17,7 @@
         :key="cur.Cur_ID"
         :value="cur.Cur_Abbreviation"
         :class="cur.Cur_Abbreviation === baseCur ? 'yellow' : ''"
-        >{{ cur.Cur_Abbreviation }}</option
-      >
+      >{{ cur.Cur_Abbreviation }}</option>
     </select>
   </div>
 </template>

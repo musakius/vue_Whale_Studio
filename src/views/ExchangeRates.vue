@@ -1,15 +1,8 @@
 <template>
   <div class="col-12 col-lg-10 mx-auto">
-    <h1 class="text-center my-5">
-      {{ "Title_Table_Page" | localize }} {{ date | date }}
-    </h1>
+    <h1 class="text-center my-5">{{ "Title_Table_Page" | localize }} {{ date | date }}</h1>
     <Spinner v-if="loading" />
-    <Table
-      v-else
-      :allCur="allCur"
-      @del-chosen="deleteChosen"
-      @add-chosen="addChosen"
-    />
+    <Table v-else :allCur="allCur" @del-chosen="deleteChosen" @add-chosen="addChosen" />
   </div>
 </template>
 
@@ -33,7 +26,7 @@ export default {
 
     service
       .getAllCurrencies()
-      .then((data) => {
+      .then(data => {
         this.allCur = this.setCur(data);
         this.loading = false;
       })
@@ -47,16 +40,16 @@ export default {
       return arr.sort(this.sortByUsdEurRub);
     },
     addChosen(id) {
-      const chosenElem = this.allCur.find((el) => el.Cur_ID === id);
+      const chosenElem = this.allCur.find(el => el.Cur_ID === id);
       chosenElem.chosen = true;
-      const restElem = this.allCur.filter((el) => el.Cur_ID !== id);
+      const restElem = this.allCur.filter(el => el.Cur_ID !== id);
       this.allCur = [chosenElem, ...restElem];
     },
 
     deleteChosen(id) {
-      const chosenElem = this.allCur.find((el) => el.Cur_ID === id);
+      const chosenElem = this.allCur.find(el => el.Cur_ID === id);
       chosenElem.chosen = false;
-      const restElem = this.allCur.filter((el) => el.Cur_ID !== id);
+      const restElem = this.allCur.filter(el => el.Cur_ID !== id);
       this.allCur = [...restElem, chosenElem].sort(this.sortByNameAndChosen);
     },
 
