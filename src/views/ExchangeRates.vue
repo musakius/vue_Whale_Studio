@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-lg-10 mx-auto">
-    <h1 class="text-center my-5">{{ "Title_Table_Page" | localize }} {{ date | date }}</h1>
+    <h2 class="text-center my-5">{{ "Title_Table_Page" | localize }} {{ date | date }}</h2>
     <Spinner v-if="loading" />
     <Table v-else :allCur="allCur" @del-chosen="deleteChosen" @add-chosen="addChosen" />
   </div>
@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+h2 {
   font-family: cursive;
 }
 </style>

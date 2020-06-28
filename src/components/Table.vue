@@ -36,7 +36,8 @@ export default {
   },
   methods: {
     srtLocalCur(strEn, strRu) {
-      return localStorage.getItem("ru-en") === "ru-RU" ? strRu : strEn;
+      const local = localStorage.getItem("ru-en") || "ru-RU";
+      return local === "ru-RU" ? strRu : strEn;
     }
   }
 };

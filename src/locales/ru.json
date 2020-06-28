@@ -5,6 +5,10 @@
   "Rates_td": "Курс",
   "Code_td": "Код",
   "Chosen_td": "Избранные",
-  "Title_Table_Page": "Курсы валют на",
-  "Title_Home_Page": "Конвертер валют по курсу Нацбанка"
+  "Title_Table_Page": "Курсы валют к белорусскому рублю на",
+  "Title_Home_Page": "Конвертер валют по курсу Нацбанка",
+  "Name_One_Input": "Имеющаяся валюта:",
+  "Name_Two_Input": "Нужная валюта:",
+  "Entry_field": "Поле ввода:",
+  "Result": "Результат:"
 }

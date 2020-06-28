@@ -5,8 +5,12 @@
   "Rates_td": "Rates",
   "Code_td": "Code",
   "Chosen_td": "Chosen",
-  "Title_Table_Page": "Exchange Rates for ",
+  "Title_Table_Page": "Exchange rates to the Belarusian ruble on  ",
   "Title_Home_Page": "Currency converter at the rate of the National Bank",
+  "Name_One_Input": "Currency available:",
+  "Name_Two_Input": "Desired Currency:",
+  "Entry_field": "Entry field:",
+  "Result": "Result:",
   "Cur_Eng_Name": [
     "Australian Dollar",
     "Bulgarian Lev",
