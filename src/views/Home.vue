@@ -69,7 +69,7 @@ export default {
       const { Cur_OfficialRate: oneRat, Cur_Scale: oneSc } = this.oneObjCur;
       const { Cur_OfficialRate: twoRat, Cur_Scale: twoSc } = this.twoObjCur;
       if (str === "one-cur") {
-        this.twoValСur = (((oneRat / twoRat) * val) / oneSc).toFixed(2);
+        this.twoValСur = ((val * oneRat) / (twoRat / twoSc) / oneSc).toFixed(2);
       } else {
         this.oneValСur = ((val * twoRat) / (oneRat / oneSc) / twoSc).toFixed(2);
       }
